@@ -134,11 +134,6 @@ export function CoverImageUpload({
           transition-all flex flex-col items-center justify-center gap-4 px-6 py-10
         `}
         style={{ aspectRatio }}
-        onClick={() => {
-          if (!uploading && mode === "upload") {
-            inputRef.current?.click()
-          }
-        }}
       >
         {mode === "upload" ? (
           // 上传模式 UI
@@ -154,11 +149,7 @@ export function CoverImageUpload({
                 <div className="text-center space-y-1 w-full max-w-md">
                   <p className="text-sm text-muted-foreground">点击或拖拽图片上传</p>
                   <p className="text-xs text-primary">或者：使用外部图片链接 (推荐)</p>
-                  <div
-                    className="mt-2 flex items-center gap-2"
-                    onClick={(e) => e.stopPropagation()}
-                    onMouseDown={(e) => e.stopPropagation()}
-                  >
+                  <div className="mt-2 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                     <input
                       className="w-full bg-background border border-border rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-primary/20 outline-none"
                       placeholder="请输入外部图片链接"
@@ -177,8 +168,7 @@ export function CoverImageUpload({
                 <input
                   ref={inputRef}
                   type="file"
-                  accept={ALLOWED_TYPES.join(",")}
-                  className="hidden"
+                  className="absolute inset-0 opacity-0 cursor-pointer"
                   onChange={handleFileChange}
                 />
               </>
